@@ -34,6 +34,8 @@ const Popularjobs = () => {
             />
           )}
           keyExtractor={item => item?.job_id}
+          contentContainerStyle={{ columGap: SIZES.meium}}
+          horizontal
         />
        ) }
       </View>
