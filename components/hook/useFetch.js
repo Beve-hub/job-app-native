@@ -2,13 +2,32 @@ import { useState, useEffect } from "react";
 import axios from "axios";
  
 
-const useFetch = (endpoint, query) => {
+const useFetch = ({endpoint}) => {
+  
    const [data, setData] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
    const [error, setError] = useState(null);
   
+   
+   const url: `https://jsearch.p.rapidapi.com/${endpoint}`;
 
-const options = {
+   useEffect(() => {
+      axios.get(url)
+      .then((response) => {
+        setData(response.data.data);
+        setIsLoading(false);
+      })
+      .catch (error) {
+        setIsLoading(false)
+        setError(error);
+        alert('There is an error')
+      }
+   }, [data])
+
+   
+   
+
+{/*const options = {
   method: 'GET',
   url: `https://jsearch.p.rapidapi.com/${endpoint}`,
   headers: {
@@ -43,7 +62,7 @@ const  fetchData = async () => {
  const reFetch = () => {
   setIsLoading(true);
   fetchData()
- }
+ }*/}
 
  return {data, isLoading, error, refetch};
 }
